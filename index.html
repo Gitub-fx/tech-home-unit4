@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>똑똑한 기술 탐험 | 중1 기술·가정 4단원 학습자료</title>
+<meta name="description" content="2022 개정 교육과정 중학교 기술·가정 '지속가능한 기술과 융합' 영역 성취기준([9기가04-05·06·09·12·13])을 근거로 만든 인터랙티브 학습자료">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --bg:#f6f7fb; --surface:#ffffff; --surface-2:#eef1f8; --text:#1b2033; --muted:#5b6478; --line:#dde2ee;
+  --brand:#2f5bea; --brand-soft:#e3eaff; --ok:#14804a; --ok-soft:#dcf5e7; --bad:#c2410c; --bad-soft:#fde8dc;
+  --c1:#2f5bea; --c2:#7c3aed; --c3:#0f8a7a; --c4:#d9480f;
+  --radius:14px; --shadow:0 1px 2px rgba(20,30,60,.06),0 4px 16px rgba(20,30,60,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0f1220; --surface:#171b2e; --surface-2:#1f2540; --text:#e8ebf5; --muted:#a3abc2; --line:#2c3352;
+    --brand:#7c9bff; --brand-soft:#232c55; --ok:#4ade80; --ok-soft:#173826; --bad:#fb923c; --bad-soft:#3d2414;
+    --c1:#7c9bff; --c2:#b394ff; --c3:#3fd1bd; --c4:#ff9a62;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.65;font-size:16px;word-break:keep-all}
+a{color:var(--brand)}
+header.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-inner{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.logo{font-weight:800;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
+.logo small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;flex:1;min-width:0;padding-bottom:2px}
+nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:7px 12px;border-radius:999px;border:1px solid transparent}
+nav.tabs a:hover{background:var(--surface-2)}
+nav.tabs a.active{background:var(--brand-soft);color:var(--brand);border-color:color-mix(in srgb,var(--brand) 30%,transparent)}
+main{max-width:1080px;margin:0 auto;padding:24px 16px 80px}
+section.page{display:none;animation:fade .25s ease}
+section.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(26px,4vw,36px);line-height:1.25;letter-spacing:-.03em;margin:8px 0 10px}
+h2{font-size:22px;letter-spacing:-.02em;margin:36px 0 12px}
+h3{font-size:18px;margin:0 0 8px}
+p{margin:0 0 12px}
+.lead{color:var(--muted);font-size:17px;max-width:760px}
+.kicker{display:inline-block;font-size:13px;font-weight:700;color:var(--accent,var(--brand));background:color-mix(in srgb,var(--accent,var(--brand)) 14%,transparent);padding:3px 10px;border-radius:999px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.std{border-left:5px solid var(--accent,var(--brand));background:var(--surface);border-radius:var(--radius);padding:14px 16px;margin:10px 0;box-shadow:var(--shadow)}
+.std .code{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;color:var(--accent,var(--brand));margin-right:6px}
+.std .src{display:block;margin-top:6px;font-size:12.5px;color:var(--muted)}
+.lesson-card{text-decoration:none;color:inherit;display:block;border-top:5px solid var(--accent)}
+.lesson-card:hover{transform:translateY(-2px);transition:.15s}
+.lesson-card .num{font-size:13px;font-weight:800;color:var(--accent)}
+.chip{display:inline-block;font-size:12.5px;padding:2px 9px;border-radius:999px;background:var(--surface-2);color:var(--muted);margin:2px 4px 2px 0;font-weight:600}
+ul.goals{margin:0;padding-left:20px}
+ul.goals li{margin:4px 0}
+.concept h3{color:var(--accent,var(--brand))}
+.concept .ico{font-size:28px;line-height:1}
+.btn{font:inherit;font-weight:700;font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:8px 14px;border-radius:10px;cursor:pointer}
+.btn:hover{border-color:var(--brand)}
+.btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+.btn.sel{background:var(--brand-soft);border-color:var(--brand);color:var(--brand)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fb{margin-top:10px;padding:10px 12px;border-radius:10px;font-size:15px;display:none}
+.fb.show{display:block}
+.fb.ok{background:var(--ok-soft);color:var(--ok)}
+.fb.bad{background:var(--bad-soft);color:var(--bad)}
+.fb.info{background:var(--surface-2);color:var(--text)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:var(--surface-2);white-space:nowrap}
+.table-wrap{overflow-x:auto;border-radius:12px}
+.lv{font-weight:800;text-align:center;width:56px}
+.lv-a{color:var(--ok)} .lv-b{color:var(--brand)} .lv-c{color:var(--bad)}
+textarea,input[type=text]{font:inherit;width:100%;border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:10px;padding:10px}
+textarea{min-height:76px;resize:vertical}
+label.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+label.chk input{margin-top:5px;width:18px;height:18px;accent-color:var(--brand)}
+.quiz-q{margin:14px 0}
+.quiz-q .opts{display:grid;gap:6px;margin-top:6px}
+.quiz-q .opt{text-align:left;font-weight:500}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.flow .node{flex:1 1 130px;background:var(--surface-2);border-radius:12px;padding:10px 12px;text-align:center;font-weight:700;position:relative}
+.flow .node small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.flow .arrow{align-self:center;color:var(--muted);font-weight:800}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+.bits{background:var(--surface-2);border-radius:10px;padding:10px;max-height:120px;overflow:auto}
+/* robot grid */
+.robot-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,320px);gap:16px}
+@media (max-width:720px){.robot-wrap{grid-template-columns:1fr}}
+.rgrid{display:grid;gap:4px;width:100%;max-width:420px;aspect-ratio:7/5}
+.cell{background:var(--surface-2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:clamp(16px,4vw,26px)}
+.cell.wall{background:color-mix(in srgb,var(--c4) 35%,var(--surface-2))}
+.cell.goal{background:color-mix(in srgb,var(--ok) 30%,var(--surface-2))}
+.cell.trail{background:color-mix(in srgb,var(--brand) 18%,var(--surface-2))}
+.bot{display:inline-block;transition:transform .2s}
+.prog{min-height:44px;background:var(--surface-2);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:4px}
+.prog span{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:13px;font-weight:700}
+.sort-zone{min-height:64px;border:2px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.tag{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600;cursor:pointer}
+.tag.picked{outline:2px solid var(--brand)}
+.tag.ok{border-color:var(--ok);color:var(--ok)} .tag.no{border-color:var(--bad);color:var(--bad)}
+.cat-card{border:2px solid var(--line);border-radius:12px;padding:10px;text-align:center;cursor:pointer;background:var(--surface);user-select:none}
+.cat-card .em{font-size:30px}
+.cat-card.on{border-color:var(--brand);background:var(--brand-soft)}
+.meter{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;background:var(--brand);width:0;transition:width .4s}
+.idea-card{border:2px solid var(--c4);border-radius:14px;padding:16px;background:var(--surface)}
+.note{font-size:13.5px;color:var(--muted)}
+footer{max-width:1080px;margin:0 auto;padding:24px 16px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:center}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+.hero-art{background:linear-gradient(135deg,var(--brand-soft),color-mix(in srgb,var(--c3) 18%,var(--surface)));border-radius:20px;padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hero-art div{background:var(--surface);border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:14px}
+.hero-art div span{display:block;font-size:30px}
+.progress-bar{display:flex;gap:6px;margin-top:8px}
+.progress-bar i{flex:1;height:6px;border-radius:9px;background:var(--surface-2)}
+.progress-bar i.done{background:var(--ok)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="logo">🤖 똑똑한 기술 탐험<small>중1 기술·가정 Ⅳ. 지속가능한 기술과 융합</small></div>
+    <nav class="tabs" id="tabs">
+      <a href="#home" data-p="home">단원 안내</a>
+      <a href="#l1" data-p="l1">1차시 정보통신·AI</a>
+      <a href="#l2" data-p="l2">2차시 AI 문제해결</a>
+      <a href="#l3" data-p="l3">3차시 로봇·자동화</a>
+      <a href="#l4" data-p="l4">4차시 융합 기술</a>
+      <a href="#evidence" data-p="evidence">근거·성취수준</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<section class="page" id="p-home">
+  <div class="hero">
+    <div>
+      <span class="kicker">2022 개정 교육과정 · 중학교 기술·가정</span>
+      <h1>정보통신·인공지능부터 로봇, 융합 기술까지<br>우리 삶을 바꾸는 똑똑한 기술 탐험</h1>
+      <p class="lead">이 학습자료는 교육과정 MCP(korean-secondary-learning-map-mcp)에서 가져온 <b>공식 성취기준 원문</b>을 근거로 만들었어요. 차시마다 개념을 익히고, 직접 실험·시뮬레이션해 보고, 성취수준에 비추어 스스로 점검해 보세요.</p>
+      <div class="progress-bar" id="progressBar" aria-label="차시 완료 현황"><i></i><i></i><i></i><i></i></div>
+      <p class="note" id="progressText" style="margin-top:6px"></p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div><span>📡</span>정보통신</div>
+      <div><span>🧠</span>인공지능</div>
+      <div><span>🦾</span>로봇·자동화</div>
+      <div><span>🧬</span>융합 기술</div>
+    </div>
+  </div>
+
+  <h2>차시 구성</h2>
+  <div class="grid g4">
+    <a class="card lesson-card" href="#l1" style="--accent:var(--c1)"><div class="num">1차시 · [9기가04-05]</div><h3>정보통신·AI 기술과 우리 삶</h3><p class="note">통신 체제를 이해하고, AI 활용 사례가 삶에 미치는 영향을 여러 관점에서 평가해요.</p></a>
+    <a class="card lesson-card" href="#l2" style="--accent:var(--c2)"><div class="num">2차시 · [9기가04-06]</div><h3>AI 기술로 문제 해결하기</h3><p class="note">학습 데이터가 AI 결과를 바꾸는 실험을 하고, 문제 해결 과정에 따라 AI 서비스를 설계해요.</p></a>
+    <a class="card lesson-card" href="#l3" style="--accent:var(--c3)"><div class="num">3차시 · [9기가04-09]</div><h3>로봇의 제어와 자동화</h3><p class="note">센서·제어기·구동기를 구분하고, 로봇 시뮬레이터로 개회로·폐회로 제어를 체험해요.</p></a>
+    <a class="card lesson-card" href="#l4" style="--accent:var(--c4)"><div class="num">4차시 · [9기가04-12·13]</div><h3>융합 기술과 지속가능한 미래</h3><p class="note">융합 기술 사례를 분석하고, 지속가능성을 고려한 나만의 융합 기술 아이디어를 제안해요.</p></a>
+  </div>
+
+  <h2>이 단원의 근거가 되는 성취기준</h2>
+  <div id="homeStds"></div>
+  <p class="note">※ 출판사별 교과서마다 단원 번호·구성이 다를 수 있어요. 이 자료는 2022 개정 기술·가정 교육과정의 네 번째 영역 「지속가능한 기술과 융합」 가운데 정보통신·인공지능, 로봇, 융합 기술 성취기준을 다룹니다.</p>
+</section>
+
+<!-- ================= LESSON 1 ================= -->
+<section class="page" id="p-l1" style="--accent:var(--c1)">
+  <span class="kicker">1차시</span>
+  <h1>정보통신·인공지능 기술과 우리 삶</h1>
+  <div data-std="[9기가04-05]"></div>
+
+  <h2>학습 목표</h2>
+  <div class="card"><ul class="goals">
+    <li>통신 체제(입력–과정–출력–되먹임)의 흐름을 설명할 수 있다.</li>
+    <li>생활 속 정보통신·인공지능 기술의 활용 사례를 찾을 수 있다.</li>
+    <li>인공지능 기술이 개인·사회·윤리 측면에서 미치는 영향을 근거를 들어 평가할 수 있다.</li>
+  </ul></div>
+
+  <h2>핵심 개념</h2>
+  <div class="grid g3 concept">
+    <div class="card"><div class="ico">📡</div><h3>정보통신 기술</h3><p>정보를 만들고, 부호로 바꾸어 전달하고, 받아서 다시 이해할 수 있는 형태로 바꾸는 기술이에요. 스마트폰, 인터넷, 위성통신, 사물인터넷(IoT)이 모두 여기에 속해요.</p></div>
+    <div class="card"><div class="ico">🔁</div><h3>통신 체제</h3><p><b>입력</b>(정보 생성) → <b>과정</b>(부호화 → 전송 → 복호화) → <b>출력</b>(정보 이용)으로 이어지고, 결과를 확인해 다시 반영하는 <b>되먹임</b>이 있어요.</p></div>
+    <div class="card"><div class="ico">🧠</div><h3>인공지능(AI)</h3><p>사람의 학습·추론·인식 능력을 컴퓨터로 구현한 기술이에요. 많은 데이터에서 규칙을 스스로 찾아내는 <b>기계학습</b>이 대표적인 방법이에요.</p></div>
+  </div>
+
+  <h2>활동 1. 메시지가 전달되는 과정 체험하기</h2>
+  <div class="card">
+    <p>보낼 메시지를 입력하면, 컴퓨터가 이해하는 0과 1의 신호로 <b>부호화</b>되어 전송되고, 받는 쪽에서 다시 글자로 <b>복호화</b>되는 과정을 볼 수 있어요.</p>
+    <div class="row"><input type="text" id="msgIn" maxlength="12" value="안녕 AI" style="max-width:260px" aria-label="보낼 메시지"><button class="btn primary" id="msgSend">전송하기</button></div>
+    <div class="flow" style="margin-top:14px">
+      <div class="node">① 입력<small id="f1">메시지 작성</small></div><span class="arrow">→</span>
+      <div class="node">② 부호화<small>글자 → 0과 1</small></div><span class="arrow">→</span>
+      <div class="node">③ 전송<small>전파·광케이블</small></div><span class="arrow">→</span>
+      <div class="node">④ 복호화<small>0과 1 → 글자</small></div><span class="arrow">→</span>
+      <div class="node">⑤ 출력<small id="f5">화면 표시</small></div>
+    </div>
+    <div style="margin-top:12px"><b class="note">전송되는 신호(UTF-8 부호, 비트 수: <span id="bitCount">0</span>)</b><div class="bits mono" id="bits">전송하기를 눌러 보세요.</div></div>
+    <div class="fb info" id="msgFb"></div>
+  </div>
+
+  <h2>활동 2. AI 기술 영향 평가표</h2>
+  <div class="card">
+    <p>사례를 하나 고르고, 각 문장이 우리 삶에 <b>긍정적</b> 영향인지 <b>부정적</b> 영향인지 판단해 보세요. 어떤 <b>관점</b>(개인·사회·윤리)에서 본 것인지도 함께 확인해요.</p>
+    <div class="row" id="caseBtns"></div>
+    <div id="caseBody" style="margin-top:12px"></div>
+    <div class="row" style="margin-top:10px"><button class="btn primary" id="caseCheck">채점하기</button></div>
+    <div class="fb" id="caseFb"></div>
+    <p style="margin-top:14px"><b>나의 종합 평가</b> — 이 기술을 앞으로 어떻게 사용하면 좋을까요? 긍정·부정 영향을 모두 고려해 써 보세요.</p>
+    <textarea data-save="l1-eval" placeholder="예) AI 추천 알고리즘은 원하는 정보를 빨리 찾게 해 주지만, 비슷한 정보만 보게 될 수 있으므로 …"></textarea>
+  </div>
+
+  <h2>확인 문제</h2>
+  <div class="card" data-quiz="l1"></div>
+
+  <h2>성취수준 자기 점검</h2>
+  <div data-level="[9기가04-05]"></div>
+  <div class="card" data-check="l1"></div>
+</section>
+
+<!-- ================= LESSON 2 ================= -->
+<section class="page" id="p-l2" style="--accent:var(--c2)">
+  <span class="kicker">2차시</span>
+  <h1>인공지능 기술로 문제 해결하기</h1>
+  <div data-std="[9기가04-06]"></div>
+
+  <h2>학습 목표</h2>
+  <div class="card"><ul class="goals">
+    <li>인공지능의 결과가 학습 데이터에 따라 달라질 수 있음을 실험으로 설명할 수 있다.</li>
+    <li>기술적 문제 해결 과정(문제 확인 → 정보 수집 → 해결 방안 탐색 → 실현 → 평가)을 순서대로 말할 수 있다.</li>
+    <li>생활 속 문제를 정보통신·AI 기술로 해결하는 방안을 설계하고, 긍정적인 태도로 평가할 수 있다.</li>
+  </ul></div>
+
+  <h2>핵심 개념</h2>
+  <div class="grid g3 concept">
+    <div class="card"><div class="ico">📊</div><h3>학습 데이터</h3><p>AI는 사람이 준 데이터에서 패턴을 배워요. 데이터가 한쪽으로 치우치면 AI의 판단도 치우치는데, 이것을 <b>데이터 편향</b>이라고 해요.</p></div>
+    <div class="card"><div class="ico">🛠️</div><h3>기술적 문제 해결 과정</h3><p>문제를 정확히 확인하고, 정보를 모아 여러 해결 방안을 떠올린 뒤(확산적 사고), 가장 알맞은 것을 골라(수렴적 사고) 실현하고 평가해요.</p></div>
+    <div class="card"><div class="ico">🤝</div><h3>책임 있는 AI 활용</h3><p>개인정보 보호, 공정성, 투명성을 생각하며 기술을 만들고 사용해야 해요. 결과가 기대와 달라도 원인을 찾아 고쳐 나가는 태도가 중요해요.</p></div>
+  </div>
+
+  <h2>활동 1. 학습 데이터 실험실 — AI는 무엇을 보고 배울까?</h2>
+  <div class="card">
+    <p>여러분은 '고양이 인식 AI'의 개발자예요. 아래 사진 카드 중 AI에게 학습시킬 데이터를 <b>4장만</b> 골라 보세요. 그다음 테스트 사진을 넣어 AI가 잘 알아보는지 확인해요.</p>
+    <p class="note">※ 실제 AI를 아주 단순하게 흉내 낸 모의 실험이에요. 이 AI는 '털 색'만 보고 판단하도록 만들어져 있어요.</p>
+    <div class="grid g4" id="trainPool" style="grid-template-columns:repeat(auto-fit,minmax(110px,1fr))"></div>
+    <p class="note" style="margin-top:8px">선택: <b id="trainCount">0</b> / 4장</p>
+    <div class="row" style="margin-top:6px"><b>테스트하기:</b><span id="testBtns" class="row"></span></div>
+    <div class="fb" id="aiFb"></div>
+    <div class="meter" aria-hidden="true"><i id="aiMeter"></i></div>
+  </div>
+
+  <h2>활동 2. 문제 해결 과정 순서 맞추기</h2>
+  <div class="card">
+    <p>기술적 문제 해결 과정의 단계를 <b>순서대로</b> 눌러 보세요.</p>
+    <div class="row" id="orderPool"></div>
+    <div class="prog" id="orderOut" style="margin-top:10px" aria-live="polite"></div>
+    <div class="row" style="margin-top:8px"><button class="btn" id="orderReset">다시 하기</button></div>
+    <div class="fb" id="orderFb"></div>
+  </div>
+
+  <h2>활동 3. 우리 학교 문제를 해결하는 AI 서비스 설계</h2>
+  <div class="card">
+    <p>예시 주제: 급식 잔반 줄이기 · 분리배출 돕기 · 등굣길 안전 · 도서 추천 등 자유롭게 정해요. 칸을 채우면 아래에 설계안이 정리돼요.</p>
+    <div class="grid g2" id="designForm"></div>
+    <div class="row" style="margin-top:12px"><button class="btn primary" id="designMake">설계안 정리하기</button><button class="btn" id="designCopy">텍스트 복사</button></div>
+    <div class="fb info" id="designOut"></div>
+  </div>
+
+  <h2>확인 문제</h2>
+  <div class="card" data-quiz="l2"></div>
+
+  <h2>성취수준 자기 점검</h2>
+  <div data-level="[9기가04-06]"></div>
+  <div class="card" data-check="l2"></div>
+</section>
+
+<!-- ================= LESSON 3 ================= -->
+<section class="page" id="p-l3" style="--accent:var(--c3)">
+  <span class="kicker">3차시</span>
+  <h1>로봇의 제어와 자동화 기술</h1>
+  <div data-std="[9기가04-09]"></div>
+
+  <h2>학습 목표</h2>
+  <div class="card"><ul class="goals">
+    <li>로봇의 구성 요소(센서·제어기·구동기)의 역할을 설명할 수 있다.</li>
+    <li>개회로 제어와 폐회로 제어의 차이를 예를 들어 설명할 수 있다.</li>
+    <li>간단한 로봇 프로그램을 만들어 실행하고, 결과를 평가하여 개선할 수 있다.</li>
+  </ul></div>
+
+  <h2>핵심 개념</h2>
+  <div class="grid g3 concept">
+    <div class="card"><div class="ico">👀</div><h3>센서 (감지)</h3><p>빛, 소리, 거리, 온도 같은 주변 정보를 감지해 전기 신호로 바꿔요. 사람의 눈·귀·피부 같은 역할이에요.</p></div>
+    <div class="card"><div class="ico">🧩</div><h3>제어기 (판단)</h3><p>센서 신호와 프로그램을 바탕으로 무엇을 할지 판단하고 명령을 내려요. 사람의 뇌 같은 역할이에요.</p></div>
+    <div class="card"><div class="ico">⚙️</div><h3>구동기 (동작)</h3><p>모터처럼 명령을 받아 실제로 움직이는 장치예요. 사람의 근육 같은 역할이에요.</p></div>
+  </div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h3>개회로 제어 (열린 제어)</h3><p>정해진 순서대로만 동작하고, 결과를 다시 확인하지 않아요. 예) 타이머로 정해진 시간만큼 굽는 토스터</p></div>
+    <div class="card"><h3>폐회로 제어 (닫힌 제어)</h3><p>센서로 결과를 확인해 다시 제어에 반영(되먹임)해요. 예) 설정 온도를 맞추려고 스스로 조절하는 에어컨</p></div>
+  </div>
+  <p class="note" style="margin-top:8px"><b>자동화</b>란 사람이 직접 조작하지 않아도 기계가 정해진 작업을 스스로 해내도록 하는 기술이에요. 공장 자동화(조립 로봇), 사무 자동화, 가정 자동화(스마트홈) 등으로 우리 생활에 쓰여요.</p>
+
+  <h2>활동 1. 부품 분류하기</h2>
+  <div class="card">
+    <p>부품을 누른 뒤, 알맞은 상자를 눌러 옮겨 보세요.</p>
+    <div class="row" id="partPool"></div>
+    <div class="grid g3" style="margin-top:12px">
+      <div><b>👀 센서</b><div class="sort-zone" data-zone="sensor"></div></div>
+      <div><b>🧩 제어기</b><div class="sort-zone" data-zone="ctrl"></div></div>
+      <div><b>⚙️ 구동기</b><div class="sort-zone" data-zone="act"></div></div>
+    </div>
+    <div class="row" style="margin-top:10px"><button class="btn primary" id="partCheck">채점하기</button><button class="btn" id="partReset">다시 하기</button></div>
+    <div class="fb" id="partFb"></div>
+  </div>
+
+  <h2>활동 2. 로봇 시뮬레이터 — 개회로 vs 폐회로</h2>
+  <div class="card">
+    <div class="row" style="margin-bottom:10px">
+      <button class="btn sel" data-mode="open">미션 A · 명령 순서대로 (개회로)</button>
+      <button class="btn" data-mode="closed">미션 B · 센서로 판단하기 (폐회로)</button>
+    </div>
+    <div class="robot-wrap">
+      <div><div class="rgrid" id="rgrid" role="img" aria-label="로봇 이동 격자"></div><p class="note" style="margin-top:6px">🤖 로봇 · 🧱 장애물 · 🔋 충전소(목표)</p></div>
+      <div>
+        <div id="openPanel">
+          <p><b>미션 A</b> 로봇이 🔋까지 가도록 명령을 순서대로 넣어요. 로봇은 결과를 확인하지 않고 명령만 실행해요.</p>
+          <div class="row"><button class="btn" data-cmd="F">⬆ 전진</button><button class="btn" data-cmd="L">↺ 왼쪽 회전</button><button class="btn" data-cmd="R">↻ 오른쪽 회전</button></div>
+          <div class="prog" id="cmdList" style="margin-top:8px"></div>
+          <div class="row" style="margin-top:8px"><button class="btn primary" id="runOpen">실행</button><button class="btn" id="undoCmd">하나 지우기</button><button class="btn" id="clearCmd">초기화</button></div>
+        </div>
+        <div id="closedPanel" hidden>
+          <p><b>미션 B</b> 이번에는 거리 센서가 있어요. 규칙을 고르고 실행해 보세요. 장애물 위치가 매번 바뀌어도 해낼 수 있을까요?</p>
+          <label class="note">앞에 장애물이 있으면 →
+            <select id="ruleBlock" class="btn"><option value="R">오른쪽 회전</option><option value="L">왼쪽 회전</option><option value="F">그냥 전진</option></select></label>
+          <label class="note" style="display:block;margin-top:6px">충전소가 보이는 방향이 있으면 →
+            <select id="ruleGoal" class="btn"><option value="turn">그쪽으로 회전</option><option value="ignore">무시하고 계속</option></select></label>
+          <div class="row" style="margin-top:8px"><button class="btn primary" id="runClosed">실행</button><button class="btn" id="shuffleMap">장애물 바꾸기</button></div>
+        </div>
+        <div class="fb" id="botFb"></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>활동 3. 개회로? 폐회로? 생활 속 제어 찾기</h2>
+  <div class="card" id="loopSort"></div>
+
+  <h2>확인 문제</h2>
+  <div class="card" data-quiz="l3"></div>
+
+  <h2>성취수준 자기 점검</h2>
+  <div data-level="[9기가04-09]"></div>
+  <div class="card" data-check="l3"></div>
+</section>
+
+<!-- ================= LESSON 4 ================= -->
+<section class="page" id="p-l4" style="--accent:var(--c4)">
+  <span class="kicker">4차시</span>
+  <h1>융합 기술과 지속가능한 미래</h1>
+  <div data-std="[9기가04-12]"></div>
+  <div data-std="[9기가04-13]"></div>
+
+  <h2>학습 목표</h2>
+  <div class="card"><ul class="goals">
+    <li>융합 기술의 의미를 알고, 여러 분야의 융합 기술 사례를 분석할 수 있다.</li>
+    <li>융합 기술이 가져올 미래 사회의 변화를 전망할 수 있다.</li>
+    <li>지속가능성을 고려하여 융합 기술로 문제를 해결하는 아이디어를 제안하고 평가할 수 있다.</li>
+  </ul></div>
+
+  <h2>핵심 개념</h2>
+  <div class="grid g3 concept">
+    <div class="card"><div class="ico">🧬</div><h3>융합 기술</h3><p>서로 다른 분야의 기술이 합쳐져 새로운 가치를 만드는 기술이에요. 정보통신(IT), 생명(BT), 나노(NT), 환경·에너지(ET), 문화(CT), 우주항공(ST) 기술 등이 서로 결합해요.</p></div>
+    <div class="card"><div class="ico">🌱</div><h3>지속가능한 발전</h3><p>미래 세대가 쓸 자원과 환경을 해치지 않으면서 현재의 필요를 채우는 발전이에요. 기술을 평가할 때 환경·사회·경제를 함께 살펴요.</p></div>
+    <div class="card"><div class="ico">💬</div><h3>공감하는 문제 해결</h3><p>기술을 쓸 사람의 입장에서 불편함을 찾고, 함께 의견을 나누며 해결책을 만들고, 과정과 결과를 돌아보는 태도예요.</p></div>
+  </div>
+
+  <h2>활동 1. 융합 기술 해부하기</h2>
+  <div class="card">
+    <p>사례를 고르고, 그 기술에 <b>합쳐진 기술 분야</b>를 모두 골라 보세요.</p>
+    <div class="row" id="fuseCases"></div>
+    <div id="fuseDesc" class="fb info show" style="margin-top:10px"></div>
+    <div class="row" id="fuseFields" style="margin-top:10px"></div>
+    <div class="row" style="margin-top:10px"><button class="btn primary" id="fuseCheck">확인하기</button></div>
+    <div class="fb" id="fuseFb"></div>
+  </div>
+
+  <h2>활동 2. 지속가능한 융합 기술 아이디어 제안서</h2>
+  <div class="card">
+    <p>우리 주변의 불편함이나 환경 문제를 하나 정하고, 두 가지 이상의 기술을 합쳐 해결하는 아이디어를 만들어 보세요.</p>
+    <div class="grid g2">
+      <div><b>아이디어 이름</b><input type="text" id="idName" data-save="l4-name" placeholder="예) 빗물 재활용 스마트 화단"></div>
+      <div><b>누구의 어떤 문제인가요?</b><input type="text" id="idProb" data-save="l4-prob" placeholder="예) 여름철 학교 화단에 물 주기가 어렵다"></div>
+    </div>
+    <p style="margin:10px 0 4px"><b>합칠 기술 분야</b> (2개 이상)</p>
+    <div class="row" id="idFields"></div>
+    <p style="margin:10px 0 4px"><b>어떻게 작동하나요?</b></p>
+    <textarea id="idHow" data-save="l4-how" placeholder="예) 토양 습도 센서가 흙이 마른 것을 감지하면, 빗물 탱크의 펌프가 작동해 물을 준다. 기록은 앱으로 확인한다."></textarea>
+    <p style="margin:10px 0 4px"><b>지속가능성 평가</b> — 해당하는 것에 체크하세요.</p>
+    <div id="idSus"></div>
+    <div class="row" style="margin-top:10px"><button class="btn primary" id="idMake">아이디어 카드 만들기</button></div>
+    <div id="idOut" style="margin-top:12px"></div>
+  </div>
+
+  <h2>확인 문제</h2>
+  <div class="card" data-quiz="l4"></div>
+
+  <h2>성취수준 자기 점검</h2>
+  <div data-level="[9기가04-12]"></div>
+  <div data-level="[9기가04-13]"></div>
+  <div class="card" data-check="l4"></div>
+</section>
+
+<!-- ================= EVIDENCE ================= -->
+<section class="page" id="p-evidence">
+  <span class="kicker">교사용 · 근거 자료</span>
+  <h1>성취기준 근거와 수업용 성취수준</h1>
+  <p class="lead">교육과정 MCP에서 조회한 성취기준 원문·학습 주제·평가 관점을 정리했어요. 성취수준(상·중·하)은 성취기준 문장의 지식·기능·태도 요소를 근거로 이 수업에 맞게 재구성한 <b>예시</b>예요.</p>
+
+  <h2>1. MCP 조회 정보</h2>
+  <div class="card">
+    <table><tbody>
+      <tr><th>MCP 서버</th><td><a href="https://github.com/raphysicst-create/korean-secondary-learning-map-mcp" target="_blank" rel="noopener">korean-secondary-learning-map-mcp</a> v0.3.0 (한국 중등 2022 개정 교육과정 학습 그래프)</td></tr>
+      <tr><th>과목</th><td>기술·가정 2022 개정 중학교 교육과정 (<span class="mono">kr-2022-middle-기술-가정</span>, 성취기준 52개, 4개 영역)</td></tr>
+      <tr><th>영역</th><td>④ 지속가능한 기술과 융합 ([9기가04-01] ~ [9기가04-13], 13개 중 5개 선택)</td></tr>
+      <tr><th>원문 출처</th><td>교육부 고시 제2022-33호 2022 개정 교육과정 별책 (MCP sourceRef <span class="mono">kr-moe-2022-33-annex10</span>, 원본 PDF 34쪽 「기술·가정 &gt; 지속가능한 기술과 융합」)</td></tr>
+      <tr><th>사용한 조회</th><td><span class="mono">list_curricula</span>(schoolLevel=middle) → <span class="mono">get_learning_roadmap</span>(기술·가정) → <span class="mono">get_standard</span>(코드별 원문) → <span class="mono">search_topics</span>(연결 학습 주제·평가 관점)</td></tr>
+    </tbody></table>
+  </div>
+
+  <h2>2. 성취기준별 근거와 성취수준</h2>
+  <div id="evList"></div>
+
+  <h2>3. 영역 전체 성취기준 (참고)</h2>
+  <div class="card table-wrap"><table id="allStd"><thead><tr><th>코드</th><th>성취기준 (MCP 요약)</th><th>이 자료</th></tr></thead><tbody></tbody></table></div>
+</section>
+</main>
+
+<footer>
+  학습자료: 중학교 1학년 기술·가정 「지속가능한 기술과 융합」 · 성취기준 출처: 교육부 고시 제2022-33호(korean-secondary-learning-map-mcp 경유) · 이 페이지는 교육 목적의 수업 자료이며 교육부·국가교육위원회의 공식 산출물이 아닙니다. · 입력한 내용은 이 브라우저에만 저장돼요.
+</footer>
+
+<script>
+/* ===== MCP에서 조회한 성취기준 데이터 (원문 그대로) ===== */
+const STD = {
+  "[9기가04-05]": {lesson:"l1", title:"정보통신·AI 기술의 활용과 영향",
+    text:"정보통신과 인공지능 기술의 활용 사례를 탐구하고, 정보통신과 인공지능 기술이 우리 삶에 미치는 영향을 다양한 관점에서 평가한다.",
+    topics:["kr.topic.2022.middle.4d0735ae1f636341103c","kr.topic.2022.middle.ba465668fc2c7e80608c"],
+    levels:{
+      A:"정보통신·AI 기술의 활용 사례를 통신 체제나 AI의 작동 방식과 연결해 설명하고, 개인·사회·윤리 등 여러 관점에서 긍정적·부정적 영향을 근거를 들어 종합적으로 평가한다.",
+      B:"생활 속 정보통신·AI 기술의 활용 사례를 찾아 설명하고, 두 가지 이상의 관점에서 영향을 평가한다.",
+      C:"정보통신·AI 기술의 활용 사례를 말하고, 한 가지 관점에서 영향을 말한다."}},
+  "[9기가04-06]": {lesson:"l2", title:"정보통신·AI 기술 관련 문제 해결",
+    text:"정보통신과 인공지능 기술 관련 문제를 이해하고 해결 방안을 탐색, 실현, 평가함으로써 긍정적인 문제 해결 태도를 갖는다.",
+    topics:["kr.topic.2022.middle.079005e81b6efbd2fb09","kr.topic.2022.middle.b7397886e7b0bad98f54"],
+    levels:{
+      A:"정보통신·AI 기술 관련 문제의 원인(예: 데이터 편향)을 분석하고, 문제 해결 과정에 따라 실현 가능한 해결 방안을 설계·평가하며 개선점을 스스로 찾는다.",
+      B:"문제 해결 과정의 단계를 따라 정보통신·AI 기술을 활용한 해결 방안을 탐색하고 제안한다.",
+      C:"정보통신·AI 기술 관련 문제를 확인하고, 안내에 따라 해결 방안의 일부를 제시한다."}},
+  "[9기가04-09]": {lesson:"l3", title:"로봇의 제어·자동화와 간단한 로봇 제작",
+    text:"로봇에 활용되고 있는 제어 및 자동화 기술 등을 탐구하여 간단한 로봇을 제작하고 평가함으로써 창조에 대한 자신감을 갖는다.",
+    topics:["kr.topic.2022.middle.27266d3a726a1358c51f","kr.topic.2022.middle.71fec6301f12bb6d2213"],
+    levels:{
+      A:"센서·제어기·구동기의 역할과 개회로·폐회로 제어의 차이를 사례로 설명하고, 목적에 맞는 로봇 프로그램을 만들어 실행 결과를 평가·개선한다.",
+      B:"로봇의 구성 요소와 제어 방식을 구분하고, 주어진 미션을 해결하는 간단한 로봇 프로그램을 만든다.",
+      C:"로봇의 구성 요소를 말하고, 안내에 따라 간단한 명령을 실행해 본다."}},
+  "[9기가04-12]": {lesson:"l4", title:"융합 기술 사례 탐구와 미래 전망",
+    text:"기술적 문제에 대한 도전적 태도로 다양한 분야에 활용되고 있는 융합 기술의 사례를 탐구하고 미래의 기술 변화를 전망한다.",
+    topics:["kr.topic.2022.middle.2040c755be7281630b33","kr.topic.2022.middle.3a6192efff1e690261fd"],
+    levels:{
+      A:"여러 분야의 융합 기술 사례에서 결합된 기술 요소를 분석하고, 이를 근거로 미래의 기술·사회 변화를 구체적으로 전망한다.",
+      B:"융합 기술 사례를 조사하여 어떤 기술이 결합되었는지 설명하고 미래 변화를 전망한다.",
+      C:"융합 기술 사례를 말하고, 융합 기술의 의미를 설명한다."}},
+  "[9기가04-13]": {lesson:"l4", title:"지속가능한 발전을 위한 융합 기술 문제 해결",
+    text:"긍정적이고 공감하는 문제 해결 태도를 바탕으로 지속가능한 발전과 혁신을 위해 융합 기술 문제를 해결하고 과정과 결과를 평가한다.",
+    topics:["kr.topic.2022.middle.583aefe3a9e74fbca8ad","kr.topic.2022.middle.bc345c1c5ac21c011a89"],
+    levels:{
+      A:"사용자에게 공감하여 문제를 정의하고, 두 가지 이상의 기술을 융합한 해결 방안을 제안하며, 환경·사회·경제 측면에서 지속가능성을 근거 있게 평가한다.",
+      B:"융합 기술을 활용한 해결 방안을 제안하고, 지속가능성 측면에서 평가한다.",
+      C:"융합 기술로 해결할 수 있는 문제를 찾고, 간단한 해결 아이디어를 제시한다."}}
+};
+const ALL4 = [
+ ["[9기가04-01]","건설기술의 개념 및 발달과정, 건설 구조물의 종류와 특성을 이해하고 혁신사례를 탐구하기"],
+ ["[9기가04-02]","건설 구조물의 종류에 따른 계획, 설계, 시공, 유지관리 방법을 탐구하기"],
+ ["[9기가04-03]","지속가능한 건설 구조물의 모형을 설계·제작 및 평가하기"],
+ ["[9기가04-04]","전기·전자 부품의 종류와 기능을 이해하고 간단한 회로를 구성·제작·평가하기"],
+ ["[9기가04-05]","정보통신과 인공지능 기술의 활용 사례를 탐구하고 삶에 미치는 영향을 다양한 관점에서 평가하기"],
+ ["[9기가04-06]","정보통신과 인공지능 기술 관련 문제의 해결 방안을 탐색, 실현, 평가하기"],
+ ["[9기가04-07]","기계의 구성 요소 및 동력 전달 장치의 종류와 특징을 이해하고 기계요소를 선택·평가하기"],
+ ["[9기가04-08]","기계요소와 동력 전달 방법을 활용해 운동 물체를 안전하게 제작·평가하기"],
+ ["[9기가04-09]","로봇에 활용되는 제어 및 자동화 기술을 탐구하여 간단한 로봇을 제작·평가하기"],
+ ["[9기가04-10]","의료 분야 생명기술 사례를 조사하고 개인과 사회에 미친 영향을 평가하기"],
+ ["[9기가04-11]","생명기술 관련 문제의 해결 방안을 탐색·실현·평가하고 생명 존중 및 윤리적 태도 갖기"],
+ ["[9기가04-12]","다양한 분야의 융합 기술 사례를 탐구하고 미래의 기술 변화를 전망하기"],
+ ["[9기가04-13]","지속가능한 발전과 혁신을 위해 융합 기술 문제를 해결하고 과정과 결과를 평가하기"]
+];
+const SRC = "교육부 고시 제2022-33호 · korean-secondary-learning-map-mcp get_standard 조회";
+
+/* ===== 저장 도우미 ===== */
+const store = {
+  get(k,d){try{const v=localStorage.getItem("th4:"+k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem("th4:"+k,JSON.stringify(v))}catch(e){}}
+};
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const el = (tag,attrs={},html="")=>{const e=document.createElement(tag);for(const k in attrs){if(k==="class")e.className=attrs[k];else if(k.startsWith("on"))e.addEventListener(k.slice(2),attrs[k]);else e.setAttribute(k,attrs[k])}if(html)e.innerHTML=html;return e};
+const shuffle = a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const fb = (id,cls,html)=>{const f=$("#"+id);f.className="fb show "+cls;f.innerHTML=html};
+
+/* ===== 라우팅 ===== */
+function route(){
+  const p=(location.hash||"#home").slice(1);
+  const id=$("#p-"+p)?p:"home";
+  $$("section.page").forEach(s=>s.classList.toggle("active",s.id==="p-"+id));
+  $$("#tabs a").forEach(a=>a.classList.toggle("active",a.dataset.p===id));
+  window.scrollTo({top:0});
+  updateProgress();
+}
+addEventListener("hashchange",route);
+
+/* ===== 성취기준 박스 / 성취수준 표 ===== */
+function stdBox(code){return `<div class="std"><span class="code">${code}</span>${STD[code].text}<span class="src">📎 성취기준 원문 · ${SRC}</span></div>`}
+$$("[data-std]").forEach(d=>d.innerHTML=stdBox(d.dataset.std));
+$("#homeStds").innerHTML=Object.keys(STD).map(stdBox).join("");
+function levelTable(code){
+  const L=STD[code].levels;
+  return `<div class="card table-wrap" style="margin-bottom:12px"><p class="note" style="margin-bottom:8px"><b>${code}</b> 수업용 성취수준(예시)</p><table><tbody>
+  <tr><td class="lv lv-a">상</td><td>${L.A}</td></tr>
+  <tr><td class="lv lv-b">중</td><td>${L.B}</td></tr>
+  <tr><td class="lv lv-c">하</td><td>${L.C}</td></tr></tbody></table></div>`;
+}
+$$("[data-level]").forEach(d=>d.innerHTML=levelTable(d.dataset.level));
+
+/* ===== 자기 점검 ===== */
+const CHECKS={
+  l1:["통신 체제의 입력–과정–출력–되먹임을 설명할 수 있어요.","생활 속 정보통신·AI 기술 사례를 3가지 이상 말할 수 있어요.","AI 기술의 영향을 두 가지 이상의 관점에서 평가할 수 있어요."],
+  l2:["학습 데이터가 AI 결과에 영향을 준다는 것을 설명할 수 있어요.","기술적 문제 해결 과정 5단계를 순서대로 말할 수 있어요.","AI를 활용한 해결 방안을 설계하고 개선점을 찾을 수 있어요."],
+  l3:["센서·제어기·구동기의 역할을 구분할 수 있어요.","개회로 제어와 폐회로 제어를 예를 들어 설명할 수 있어요.","로봇 프로그램을 실행해 보고 결과를 평가·개선할 수 있어요."],
+  l4:["융합 기술의 뜻과 사례를 설명할 수 있어요.","융합 기술이 가져올 미래 변화를 전망할 수 있어요.","지속가능성을 고려한 융합 기술 아이디어를 제안하고 평가할 수 있어요."]
+};
+$$("[data-check]").forEach(box=>{
+  const k=box.dataset.check, saved=store.get("chk-"+k,[]);
+  box.innerHTML=`<b>나의 점검</b> <span class="note">(모두 체크하면 차시 완료!)</span>`;
+  CHECKS[k].forEach((t,i)=>{
+    const lab=el("label",{class:"chk"},`<input type="checkbox"><span>${t}</span>`);
+    const cb=$("input",lab); cb.checked=!!saved[i];
+    cb.addEventListener("change",()=>{const s=store.get("chk-"+k,[]);s[i]=cb.checked;store.set("chk-"+k,s);updateProgress()});
+    box.append(lab);
+  });
+});
+function updateProgress(){
+  const ls=["l1","l2","l3","l4"];
+  const done=ls.map(k=>{const s=store.get("chk-"+k,[]);return CHECKS[k].every((_,i)=>s[i])});
+  $$("#progressBar i").forEach((b,i)=>b.classList.toggle("done",done[i]));
+  const n=done.filter(Boolean).length;
+  $("#progressText").textContent=n===4?"🎉 모든 차시를 완료했어요!":`완료한 차시: ${n} / 4 (각 차시 맨 아래 '나의 점검'을 모두 체크하면 완료)`;
+}
+/* 텍스트 저장 */
+$$("[data-save]").forEach(t=>{t.value=store.get("txt-"+t.dataset.save,t.value||"");t.addEventListener("input",()=>store.set("txt-"+t.dataset.save,t.value))});
+
+/* ===== 퀴즈 ===== */
+const QUIZ={
+  l1:[
+    {q:"통신 체제에서 보낼 정보를 전기 신호(0과 1)로 바꾸는 단계는?",o:["입력","부호화","복호화","출력"],a:1,e:"부호화는 정보를 전송하기 알맞은 신호로 바꾸는 과정이고, 복호화는 받은 신호를 다시 원래 정보로 되돌리는 과정이에요."},
+    {q:"다음 중 인공지능 기술이 활용된 사례로 가장 알맞은 것은?",o:["건전지로 켜지는 손전등","사진 속 글자를 인식해 번역해 주는 앱","태엽으로 움직이는 장난감","손으로 돌리는 연필깎이"],a:1,e:"사진 속 글자를 인식(지각)하고 번역하는 것은 사람의 인식·언어 능력을 컴퓨터로 구현한 AI 기술이에요."},
+    {q:"AI 추천 알고리즘의 영향을 '사회' 관점에서 평가한 것은?",o:["내가 좋아하는 영상을 빨리 찾을 수 있다","사람들이 비슷한 정보만 접해 생각이 한쪽으로 치우칠 수 있다","내 휴대폰 배터리가 빨리 닳는다","앱 화면 색이 예쁘다"],a:1,e:"여러 사람이 비슷한 정보에만 갇히는 현상(필터 버블)은 사회 전체의 소통과 다양성에 영향을 주는 문제예요."}
+  ],
+  l2:[
+    {q:"고양이 인식 AI가 검은 고양이를 잘 알아보지 못했다. 가장 알맞은 원인은?",o:["컴퓨터 화면이 작아서","학습 데이터에 검은 고양이 사진이 부족해서","고양이가 움직여서","인터넷 속도가 느려서"],a:1,e:"AI는 학습한 데이터에서 패턴을 배우므로, 데이터가 치우치면(데이터 편향) 특정 대상을 잘 인식하지 못해요."},
+    {q:"기술적 문제 해결 과정의 순서로 옳은 것은?",o:["실현 → 문제 확인 → 평가 → 정보 수집 → 해결 방안 탐색","문제 확인 → 정보 수집 → 해결 방안 탐색 → 실현 → 평가","정보 수집 → 평가 → 문제 확인 → 실현 → 해결 방안 탐색","해결 방안 탐색 → 실현 → 문제 확인 → 평가 → 정보 수집"],a:1,e:"문제를 먼저 정확히 확인하고, 정보를 모아 방안을 탐색한 뒤 실현하고 평가해요. 평가 결과는 다시 개선에 반영해요."},
+    {q:"여러 아이디어를 자유롭게 많이 떠올리는 사고 방법은?",o:["수렴적 사고","확산적 사고","순차적 사고","비판적 사고"],a:1,e:"확산적 사고는 가능한 많은 아이디어를 떠올리는 것, 수렴적 사고는 그중 가장 알맞은 것을 골라내는 것이에요."}
+  ],
+  l3:[
+    {q:"로봇에서 '주변 정보를 감지하는' 역할을 하는 부분은?",o:["구동기","센서","제어기","배터리"],a:1,e:"센서는 빛·소리·거리 등 주변 정보를 감지해 전기 신호로 바꿔요."},
+    {q:"결과를 센서로 확인하여 다시 제어에 반영하는 방식은?",o:["개회로 제어","폐회로 제어","수동 제어","순차 제어"],a:1,e:"폐회로(닫힌) 제어는 되먹임이 있어서 상황이 바뀌어도 목표에 맞게 스스로 조절할 수 있어요."},
+    {q:"다음 중 폐회로 제어의 예로 가장 알맞은 것은?",o:["타이머만큼만 돌아가는 전자레인지","설정 온도를 유지하는 에어컨","정해진 시간 동안만 굽는 토스터","한 번 누르면 일정 시간 켜지는 계단 조명"],a:1,e:"에어컨은 온도 센서로 실내 온도를 계속 확인하며 냉방을 조절해요. 나머지는 결과 확인 없이 정해진 대로만 동작해요."}
+  ],
+  l4:[
+    {q:"융합 기술에 대한 설명으로 가장 알맞은 것은?",o:["한 가지 기술만 깊이 발전시킨 것","서로 다른 분야의 기술이 결합해 새로운 가치를 만드는 것","오래된 기술을 그대로 사용하는 것","기계를 사람 손으로만 조작하는 것"],a:1,e:"융합 기술은 IT·BT·NT·ET 등 여러 분야의 기술이 결합하여 새로운 제품과 서비스를 만들어요."},
+    {q:"센서로 온도·습도를 측정하고 자동으로 물과 영양분을 주는 농장은?",o:["스마트팜","스마트 그리드","드론 택배","가상 현실"],a:0,e:"스마트팜은 정보통신 기술과 생명 기술(작물 재배), 자동화 기술이 융합된 대표 사례예요."},
+    {q:"융합 기술 아이디어를 '지속가능성' 관점에서 평가할 때 가장 거리가 먼 질문은?",o:["자원과 에너지를 아낄 수 있는가?","많은 사람이 공정하게 혜택을 누릴 수 있는가?","오래 유지하고 고칠 수 있는가?","디자인이 유행에 맞는가?"],a:3,e:"지속가능성은 환경(자원·에너지), 사회(공정성·안전), 경제(유지·비용) 측면을 살펴요. 유행은 핵심 기준이 아니에요."}
+  ]
+};
+$$("[data-quiz]").forEach(box=>{
+  const k=box.dataset.quiz; let score=0, answered=0;
+  const head=el("p",{class:"note"},"보기를 눌러 답을 확인하세요.");
+  box.append(head);
+  QUIZ[k].forEach((it,qi)=>{
+    const q=el("div",{class:"quiz-q"},`<b>Q${qi+1}. ${it.q}</b>`);
+    const opts=el("div",{class:"opts"}); const f=el("div",{class:"fb"});
+    it.o.forEach((o,oi)=>{
+      const b=el("button",{class:"btn opt"},`${"①②③④"[oi]} ${o}`);
+      b.addEventListener("click",()=>{
+        if(opts.dataset.done)return; opts.dataset.done=1; answered++;
+        const ok=oi===it.a; if(ok)score++;
+        b.classList.add(ok?"right":"wrong"); opts.children[it.a].classList.add("right");
+        f.className="fb show "+(ok?"ok":"bad"); f.innerHTML=(ok?"✅ 정답! ":"🔁 다시 보기: ")+it.e;
+        if(answered===QUIZ[k].length) head.innerHTML=`<b>결과: ${QUIZ[k].length}문제 중 ${score}문제 정답</b>`;
+      });
+      opts.append(b);
+    });
+    q.append(opts,f); box.append(q);
+  });
+});
+
+/* ===== L1 활동1: 메시지 부호화 ===== */
+$("#msgSend").addEventListener("click",()=>{
+  const m=$("#msgIn").value.trim()||"안녕";
+  const bytes=[...new TextEncoder().encode(m)];
+  const bin=bytes.map(b=>b.toString(2).padStart(8,"0"));
+  $("#bits").textContent=bin.join(" ");
+  $("#bitCount").textContent=bytes.length*8;
+  $("#f1").textContent=`"${m}"`;
+  const back=new TextDecoder().decode(new Uint8Array(bytes));
+  $("#f5").textContent=`"${back}"`;
+  fb("msgFb","info",`보낸 글자 수 ${[...m].length}자 → <b>${bytes.length}바이트(${bytes.length*8}비트)</b>로 부호화되었어요. 한글 한 글자는 보통 3바이트(24비트), 영문·숫자·공백은 1바이트(8비트)예요. 받는 쪽은 같은 규칙(UTF-8)으로 복호화해서 "${back}"를 화면에 출력해요. <br>💡 만약 받는 쪽이 다른 규칙을 쓰면 글자가 깨져요 — 통신에는 서로 약속된 규칙(프로토콜)이 꼭 필요해요.`);
+});
+
+/* ===== L1 활동2: AI 영향 평가 ===== */
+const CASES={
+  "AI 번역 앱":[["외국어를 몰라도 여행지에서 길을 물을 수 있다","긍정","개인"],["다른 나라 사람들과 교류·협력이 쉬워진다","긍정","사회"],["번역이 틀려도 그대로 믿으면 오해가 생길 수 있다","부정","개인"],["대화 내용이 서버에 저장되면 개인정보가 새어 나갈 수 있다","부정","윤리"]],
+  "추천 알고리즘":[["내 취향에 맞는 영상·책을 빨리 찾을 수 있다","긍정","개인"],["비슷한 정보만 보게 되어 생각이 한쪽으로 치우칠 수 있다","부정","사회"],["작은 창작자도 관심 있는 사람에게 발견될 기회가 생긴다","긍정","사회"],["더 오래 보게 만들도록 설계되면 과몰입이 생길 수 있다","부정","윤리"]],
+  "스마트 CCTV":[["위험 상황을 빨리 감지해 안전사고를 줄인다","긍정","사회"],["실종 아동을 찾는 데 도움이 된다","긍정","사회"],["동의 없이 얼굴 정보가 수집될 수 있다","부정","윤리"],["잘못 인식해 죄 없는 사람을 의심할 수 있다","부정","윤리"]],
+  "AI 챗봇 학습 도우미":[["모르는 내용을 언제든 질문하고 설명을 들을 수 있다","긍정","개인"],["그럴듯하지만 틀린 정보를 말할 수 있다","부정","개인"],["학습 기회가 부족한 지역 학생에게도 도움이 된다","긍정","사회"],["숙제를 대신 쓰게 하면 정직성 문제가 생긴다","부정","윤리"]]
+};
+let curCase=Object.keys(CASES)[0];
+function renderCase(){
+  $$("#caseBtns .btn").forEach(b=>b.classList.toggle("sel",b.textContent===curCase));
+  const body=$("#caseBody"); body.innerHTML="";
+  CASES[curCase].forEach((r,i)=>{
+    const row=el("div",{class:"row",style:"justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line)"},`<span style="flex:1 1 260px">${r[0]} <span class="chip" data-pv hidden>${r[2]} 관점</span></span>`);
+    const g=el("div",{class:"row"});
+    ["긍정","부정"].forEach(v=>{const b=el("button",{class:"btn","data-v":v},v==="긍정"?"👍 긍정":"👎 부정");b.addEventListener("click",()=>{$$(".btn",g).forEach(x=>x.classList.remove("sel"));b.classList.add("sel");row.dataset.pick=v});g.append(b)});
+    row.dataset.ans=r[1]; row.append(g); body.append(row);
+  });
+  $("#caseFb").className="fb";
+}
+Object.keys(CASES).forEach(k=>$("#caseBtns").append(el("button",{class:"btn",onclick:()=>{curCase=k;renderCase()}},k)));
+renderCase();
+$("#caseCheck").addEventListener("click",()=>{
+  const rows=$$("#caseBody > div"); let ok=0, miss=0;
+  rows.forEach(r=>{$("[data-pv]",r).hidden=false; if(!r.dataset.pick){miss++;return} if(r.dataset.pick===r.dataset.ans)ok++; r.style.color=r.dataset.pick===r.dataset.ans?"var(--ok)":"var(--bad)"});
+  if(miss){fb("caseFb","bad",`아직 판단하지 않은 문장이 ${miss}개 있어요.`);return}
+  fb("caseFb",ok===rows.length?"ok":"bad",`${rows.length}개 중 ${ok}개 일치! 같은 기술에도 <b>긍정과 부정 영향이 함께</b> 있고, 바라보는 <b>관점(개인·사회·윤리)</b>에 따라 평가가 달라져요. 그래서 기술은 한쪽만 보지 말고 다양한 관점에서 평가해야 해요.`);
+});
+
+/* ===== L2 활동1: 학습 데이터 실험 ===== */
+const POOL=[["🐈","주황 고양이","주황"],["🐈","주황 고양이","주황"],["🐈","회색 고양이","회색"],["🐈","회색 고양이","회색"],["🐈","흰 고양이","흰색"],["🐈‍⬛","검은 고양이","검정"],["🐈","주황 고양이","주황"],["🐈‍⬛","검은 고양이","검정"]];
+const TESTS=[["검정","🐈‍⬛ 검은 고양이"],["흰색","🐈 흰 고양이"],["주황","🐈 주황 고양이"]];
+const picked=new Set();
+POOL.forEach((p,i)=>{
+  const c=el("div",{class:"cat-card",role:"button",tabindex:"0"},`<div class="em">${p[0]}</div><div class="note">${p[1]}</div>`);
+  const tog=()=>{if(picked.has(i)){picked.delete(i);c.classList.remove("on")}else if(picked.size<4){picked.add(i);c.classList.add("on")}$("#trainCount").textContent=picked.size};
+  c.addEventListener("click",tog); c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tog()}});
+  $("#trainPool").append(c);
+});
+TESTS.forEach(([col,label])=>$("#testBtns").append(el("button",{class:"btn",onclick:()=>{
+  if(picked.size<4){fb("aiFb","bad","먼저 학습 데이터 4장을 골라 주세요.");$("#aiMeter").style.width="0";return}
+  const cols=[...picked].map(i=>POOL[i][2]); const same=cols.filter(c=>c===col).length;
+  const conf=same?Math.min(97,55+same*14):12;
+  $("#aiMeter").style.width=conf+"%";
+  const kinds=[...new Set(cols)].join(", ");
+  if(same) fb("aiFb","ok",`AI 판단: <b>고양이예요! (확신도 ${conf}%)</b><br>학습 데이터에 ${col} 고양이가 ${same}장 있었기 때문에 알아볼 수 있었어요. (학습한 색: ${kinds})`);
+  else fb("aiFb","bad",`AI 판단: <b>고양이가 아닌 것 같아요… (확신도 ${conf}%)</b><br>학습 데이터에 ${col} 고양이가 한 장도 없었어요(학습한 색: ${kinds}). 이렇게 데이터가 한쪽으로 치우치면 AI도 잘못 판단해요 → <b>데이터 편향</b>.<br>🔧 해결 방안: 다양한 데이터를 고르게 모아 다시 학습시키기! 카드를 바꿔 다시 실험해 보세요.`);
+}},label)));
+
+/* ===== L2 활동2: 순서 맞추기 ===== */
+const STEPS=["문제 확인","정보 수집","해결 방안 탐색","실현","평가"];
+let ordIdx=0;
+function renderOrder(){
+  ordIdx=0; $("#orderOut").innerHTML=""; $("#orderPool").innerHTML=""; $("#orderFb").className="fb";
+  shuffle(STEPS).forEach(s=>{const b=el("button",{class:"btn"},s);b.addEventListener("click",()=>{
+    if(s===STEPS[ordIdx]){ordIdx++;b.disabled=true;$("#orderOut").append(el("span",{},`${ordIdx}. ${s}`));
+      if(ordIdx===STEPS.length)fb("orderFb","ok","✅ 완벽해요! 평가 후 부족한 점은 다시 개선하여 반영해요(되먹임).");
+      else $("#orderFb").className="fb";}
+    else fb("orderFb","bad",`'${s}'는 ${ordIdx+1}번째 단계가 아니에요. 무엇을 먼저 해야 할지 생각해 보세요.`);
+  });$("#orderPool").append(b)});
+}
+renderOrder(); $("#orderReset").addEventListener("click",renderOrder);
+
+/* ===== L2 활동3: 설계 ===== */
+const DFIELDS=[["문제 확인","어떤 문제인가요? 누가 불편한가요?","예) 급식 잔반이 많이 버려진다"],["정보 수집","어떤 자료·데이터를 모을까요?","예) 메뉴별 잔반 양, 선호도 설문"],["해결 방안 탐색","AI·정보통신 기술로 어떻게 해결할까요?","예) 잔반 사진을 AI가 분석해 메뉴별 선호도를 알려 주는 앱"],["실현","어떻게 만들고 시험해 볼까요?","예) 2주 동안 한 학급에서 시범 운영"],["평가","무엇으로 성공을 판단할까요? 걱정되는 점은?","예) 잔반 양 비교 / 사진 속 얼굴이 찍히지 않게 주의"]];
+DFIELDS.forEach(([t,q,ph],i)=>{const d=el("div",{},`<b>${i+1}. ${t}</b><div class="note">${q}</div>`);const ta=el("textarea",{"data-save":"l2-d"+i,placeholder:ph});ta.value=store.get("txt-l2-d"+i,"");ta.addEventListener("input",()=>store.set("txt-l2-d"+i,ta.value));d.append(ta);$("#designForm").append(d)});
+function designText(){return DFIELDS.map(([t],i)=>`${i+1}. ${t}: ${$$("#designForm textarea")[i].value.trim()||"(미작성)"}`).join("\n")}
+$("#designMake").addEventListener("click",()=>{const empty=$$("#designForm textarea").filter(t=>!t.value.trim()).length;
+  fb("designOut",empty?"bad":"ok",`<b>🤖 나의 AI 서비스 설계안</b><br>${designText().replace(/\n/g,"<br>")}<br><br>${empty?`아직 ${empty}칸이 비어 있어요.`:"✅ 모든 단계를 작성했어요! 친구와 바꿔 읽고 '좋은 점 1가지, 개선할 점 1가지'를 말해 주세요."}`)});
+$("#designCopy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(designText());fb("designOut","ok","📋 클립보드에 복사했어요. 패들릿이나 활동지에 붙여 넣으세요.")}catch(e){fb("designOut","bad","복사에 실패했어요. 직접 선택해서 복사해 주세요.")}});
+
+/* ===== L3 활동1: 부품 분류 ===== */
+const PARTS=[["초음파 거리 센서","sensor"],["빛(조도) 센서","sensor"],["온도 센서","sensor"],["마이크로컨트롤러 보드","ctrl"],["DC 모터","act"],["서보 모터","act"],["스피커(부저)","act"]];
+let pickedPart=null;
+function renderParts(){
+  pickedPart=null; $("#partPool").innerHTML=""; $$(".sort-zone").forEach(z=>z.innerHTML=""); $("#partFb").className="fb";
+  shuffle(PARTS).forEach(([n,z])=>{const t=el("span",{class:"tag",role:"button",tabindex:"0","data-z":z},n);
+    const pick=()=>{$$(".tag").forEach(x=>x.classList.remove("picked"));pickedPart=t;t.classList.add("picked")};
+    t.addEventListener("click",e=>{e.stopPropagation();pick()}); t.addEventListener("keydown",e=>{if(e.key==="Enter")pick()});
+    $("#partPool").append(t)});
+}
+$$(".sort-zone").forEach(z=>z.addEventListener("click",()=>{if(pickedPart){z.append(pickedPart);pickedPart.classList.remove("picked","ok","no");pickedPart=null}}));
+$("#partPool").addEventListener("click",()=>{if(pickedPart){$("#partPool").append(pickedPart);pickedPart.classList.remove("picked");pickedPart=null}});
+renderParts(); $("#partReset").addEventListener("click",renderParts);
+$("#partCheck").addEventListener("click",()=>{
+  if($("#partPool").children.length){fb("partFb","bad","아직 분류하지 않은 부품이 있어요.");return}
+  let ok=0;$$(".sort-zone .tag").forEach(t=>{const r=t.dataset.z===t.parentElement.dataset.zone;t.classList.add(r?"ok":"no");if(r)ok++});
+  fb("partFb",ok===PARTS.length?"ok":"bad",`${PARTS.length}개 중 ${ok}개 정답! 💡 스피커(부저)는 소리를 '내보내는' 출력 장치라서 구동기(출력부)에 넣어요. 센서는 받아들이고(입력), 제어기는 판단하고, 구동기는 움직이거나 내보내요(출력).`);
+});
+
+/* ===== L3 활동2: 로봇 시뮬레이터 ===== */
+const W=7,H=5, DIRS=[[0,-1],[1,0],[0,1],[-1,0]], ARW=["⬆","➡","⬇","⬅"];
+let mode="open", walls=new Set(), goal=[6,0], start=[0,4,0], cmds=[], busy=false;
+const OPEN_WALLS=["2,4","2,3","2,2","4,0","4,1","4,2","5,2"];
+function key(x,y){return x+","+y}
+function setMap(){
+  if(mode==="open"){walls=new Set(OPEN_WALLS);goal=[6,0];start=[0,4,0]}
+  else{ // 무작위 장애물(도달 가능한 맵만)
+    for(let t=0;t<200;t++){walls=new Set();const n=6+Math.floor(Math.random()*3);
+      while(walls.size<n){const x=Math.floor(Math.random()*W),y=Math.floor(Math.random()*H);if((x===0&&y===4)||(x===6&&y===0)||(x===0&&y===3))continue;walls.add(key(x,y))}
+      if(simulateRule(true).ok)break}
+    goal=[6,0];start=[0,4,0];
+  }
+  drawGrid(start,[]);
+}
+function drawGrid(bot,trail){
+  const g=$("#rgrid"); g.style.gridTemplateColumns=`repeat(${W},1fr)`; g.innerHTML="";
+  const tr=new Set(trail.map(p=>key(p[0],p[1])));
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    const c=el("div",{class:"cell"}); const k=key(x,y);
+    if(walls.has(k)){c.classList.add("wall");c.textContent="🧱"}
+    else if(x===goal[0]&&y===goal[1]){c.classList.add("goal");c.textContent="🔋"}
+    else if(tr.has(k))c.classList.add("trail");
+    if(bot&&bot[0]===x&&bot[1]===y)c.innerHTML=`<span class="bot" title="${ARW[bot[2]]}">🤖<small style="font-size:.55em">${ARW[bot[2]]}</small></span>`;
+    g.append(c);
+  }
+}
+const blocked=(x,y)=>x<0||y<0||x>=W||y>=H||walls.has(key(x,y));
+function renderCmds(){$("#cmdList").innerHTML=cmds.length?cmds.map((c,i)=>`<span>${i+1}.${{F:"⬆전진",L:"↺왼쪽",R:"↻오른쪽"}[c]}</span>`).join(""):`<span class="note" style="border:0;background:none">명령을 추가하세요</span>`}
+$$("[data-cmd]").forEach(b=>b.addEventListener("click",()=>{if(cmds.length<30){cmds.push(b.dataset.cmd);renderCmds()}}));
+$("#undoCmd").addEventListener("click",()=>{cmds.pop();renderCmds()});
+$("#clearCmd").addEventListener("click",()=>{cmds=[];renderCmds();drawGrid(start,[]);$("#botFb").className="fb"});
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function animate(frames,msg){
+  busy=true; const trail=[];
+  for(const f of frames){trail.push(f);drawGrid(f,trail);await sleep(260)}
+  busy=false; fb("botFb",msg[0],msg[1]);
+}
+$("#runOpen").addEventListener("click",()=>{
+  if(busy)return; if(!cmds.length){fb("botFb","bad","명령을 먼저 넣어 주세요.");return}
+  let [x,y,d]=start; const frames=[[x,y,d]]; let crash=false;
+  for(const c of cmds){
+    if(c==="L")d=(d+3)%4; else if(c==="R")d=(d+1)%4;
+    else{const nx=x+DIRS[d][0],ny=y+DIRS[d][1]; if(blocked(nx,ny)){crash=true;break} x=nx;y=ny}
+    frames.push([x,y,d]);
+  }
+  const win=x===goal[0]&&y===goal[1];
+  animate(frames, crash?["bad","💥 쾅! 앞에 장애물(또는 벽)이 있었지만, 개회로 제어 로봇은 결과를 확인하지 않아 그대로 부딪혔어요. 명령을 고쳐서 다시 해 보세요."]
+    : win?["ok",`🔋 도착 성공! 명령 ${cmds.length}개로 해결했어요. 더 적은 명령으로도 가능할까요? 그런데 장애물 위치가 바뀌면 이 명령은 그대로 쓸 수 있을까요? → 미션 B로!`]
+    : ["bad","명령을 모두 실행했지만 충전소에 도착하지 못했어요. 로봇의 방향(화살표)을 잘 보고 명령을 추가해 보세요."]);
+});
+function simulateRule(silent){
+  const rb=silent?"R":$("#ruleBlock").value, rg=silent?"turn":$("#ruleGoal").value;
+  let [x,y,d]=start; const frames=[[x,y,d]]; const seen=new Set();
+  for(let step=0;step<60;step++){
+    if(x===goal[0]&&y===goal[1])return{ok:true,frames,step};
+    const st=key(x,y)+","+d; if(seen.has(st))break; seen.add(st);
+    if(rg==="turn"){ // 목표 쪽 칸이 비어 있고 목표 방향이면 회전
+      const want=[]; if(goal[0]>x)want.push(1); if(goal[0]<x)want.push(3); if(goal[1]<y)want.push(0); if(goal[1]>y)want.push(2);
+      const nd=want.find(w=>!blocked(x+DIRS[w][0],y+DIRS[w][1]));
+      if(nd!==undefined&&nd!==d){d=nd;frames.push([x,y,d]);continue}
+    }
+    const nx=x+DIRS[d][0],ny=y+DIRS[d][1];
+    if(blocked(nx,ny)){ if(rb==="F")return{ok:false,crash:true,frames}; d=rb==="R"?(d+1)%4:(d+3)%4; frames.push([x,y,d]); continue }
+    x=nx;y=ny;frames.push([x,y,d]);
+  }
+  return{ok:x===goal[0]&&y===goal[1],frames,loop:true};
+}
+$("#runClosed").addEventListener("click",()=>{
+  if(busy)return; const r=simulateRule(false);
+  animate(r.frames, r.ok?["ok","🔋 도착 성공! 거리 센서로 앞을 확인하고(되먹임) 상황에 맞게 방향을 바꿨기 때문이에요. '장애물 바꾸기'를 눌러도 같은 규칙으로 해낼 수 있는지 확인해 보세요. 이것이 폐회로 제어의 장점이에요."]
+    : r.crash?["bad","💥 센서가 장애물을 감지했지만 '그냥 전진' 규칙 때문에 부딪혔어요. 센서 정보를 어떻게 쓰느냐(제어 규칙)가 중요해요!"]
+    : ["bad","🔄 같은 곳을 맴돌거나 시간이 다 되어 멈췄어요. 규칙을 바꾸거나 장애물을 바꿔 다시 실험하고, 왜 그런지 이야기해 보세요."]);
+});
+$("#shuffleMap").addEventListener("click",()=>{if(!busy){setMap();$("#botFb").className="fb"}});
+$$("[data-mode]").forEach(b=>b.addEventListener("click",()=>{if(busy)return;mode=b.dataset.mode;$$("[data-mode]").forEach(x=>x.classList.toggle("sel",x===b));$("#openPanel").hidden=mode!=="open";$("#closedPanel").hidden=mode==="open";$("#botFb").className="fb";setMap()}));
+renderCmds(); setMap();
+
+/* ===== L3 활동3: 개회로/폐회로 ===== */
+const LOOPS=[["타이머로 정해진 시간만큼만 굽는 토스터","open"],["실내 온도를 재며 냉방을 조절하는 에어컨","closed"],["장애물을 감지하면 방향을 바꾸는 로봇청소기","closed"],["정해진 시간마다 같은 양의 사료를 주는 급식기","open"],["속도를 측정하며 설정 속도를 유지하는 자동차 정속 주행","closed"],["누르면 정해진 시간 동안 돌아가는 전자레인지","open"]];
+(function(){
+  const box=$("#loopSort"); box.innerHTML=`<p>각 사례가 <b>결과를 확인해 되먹임하는지</b> 생각하며 골라 보세요.</p>`;
+  let done=0,ok=0; const f=el("div",{class:"fb"});
+  shuffle(LOOPS).forEach(([t,a])=>{
+    const r=el("div",{class:"row",style:"justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line)"},`<span style="flex:1 1 240px">${t}</span>`);
+    const g=el("div",{class:"row"});
+    [["open","개회로"],["closed","폐회로"]].forEach(([v,l])=>{const b=el("button",{class:"btn"},l);b.addEventListener("click",()=>{
+      if(g.dataset.done)return; g.dataset.done=1; done++; const right=v===a; if(right)ok++;
+      b.classList.add("opt"); if(right)b.classList.add("right"); if(!right){b.classList.add("wrong");[...g.children].find(x=>x!==b).classList.add("right")}
+      if(done===LOOPS.length){f.className="fb show "+(ok===done?"ok":"bad");f.innerHTML=`${done}개 중 ${ok}개 정답! 센서로 결과를 측정해 다시 반영하면 <b>폐회로</b>, 정해진 시간·순서대로만 동작하면 <b>개회로</b>예요.`}
+    });g.append(b)});
+    r.append(g); box.append(r);
+  });
+  box.append(f);
+})();
+
+/* ===== L4 활동1: 융합 기술 해부 ===== */
+const FIELDS=["정보통신·AI","생명 기술","기계·로봇","에너지·환경","건설","나노·신소재"];
+const FUSE={
+  "스마트팜":{d:"온도·습도·빛 센서로 작물 환경을 측정하고, 자동으로 물·영양분을 주며 스마트폰으로 원격 관리하는 농장",a:["정보통신·AI","생명 기술","기계·로봇"]},
+  "수술 로봇":{d:"의사가 조종기로 정밀한 로봇 팔을 움직여 작은 절개로 수술하고, 영상 기술로 몸속을 크게 보며 수술하는 시스템",a:["기계·로봇","생명 기술","정보통신·AI"]},
+  "스마트 그리드":{d:"전기를 만드는 곳과 쓰는 곳의 정보를 실시간으로 주고받아 전력을 효율적으로 나누고, 태양광 등 재생에너지를 연결하는 지능형 전력망",a:["에너지·환경","정보통신·AI"]},
+  "3D 프린팅 건축":{d:"컴퓨터 설계 데이터에 따라 대형 3D 프린터가 콘크리트 등을 층층이 쌓아 건물을 짓는 기술",a:["건설","기계·로봇","정보통신·AI","나노·신소재"],opt:["나노·신소재"]},
+  "자율주행 전기차":{d:"카메라·레이더 등 센서와 AI가 주변을 인식해 스스로 운전하고, 배터리 전기로 달리는 자동차",a:["정보통신·AI","기계·로봇","에너지·환경"]}
+};
+let curFuse=Object.keys(FUSE)[0]; const fusePick=new Set();
+function renderFuse(){
+  $$("#fuseCases .btn").forEach(b=>b.classList.toggle("sel",b.textContent===curFuse));
+  $("#fuseDesc").innerHTML=`<b>${curFuse}</b> — ${FUSE[curFuse].d}`;
+  fusePick.clear(); $$("#fuseFields .btn").forEach(b=>b.classList.remove("sel","opt","right","wrong")); $("#fuseFb").className="fb";
+}
+Object.keys(FUSE).forEach(k=>$("#fuseCases").append(el("button",{class:"btn",onclick:()=>{curFuse=k;renderFuse()}},k)));
+FIELDS.forEach(f=>{const b=el("button",{class:"btn"},f);b.addEventListener("click",()=>{fusePick.has(f)?fusePick.delete(f):fusePick.add(f);b.classList.toggle("sel")});$("#fuseFields").append(b)});
+renderFuse();
+$("#fuseCheck").addEventListener("click",()=>{
+  const C=FUSE[curFuse], opt=C.opt||[], need=C.a.filter(x=>!opt.includes(x));
+  const missed=need.filter(x=>!fusePick.has(x)), extra=[...fusePick].filter(x=>!C.a.includes(x));
+  $$("#fuseFields .btn").forEach(b=>{const f=b.textContent;b.classList.remove("sel");if(C.a.includes(f)&&(fusePick.has(f)||!opt.includes(f)))b.classList.add("opt","right");else if(fusePick.has(f))b.classList.add("opt","wrong")});
+  const ok=!missed.length&&!extra.length;
+  fb("fuseFb",ok?"ok":"bad",(ok?"✅ 잘 분석했어요! ":"🔍 다시 살펴봐요. ")+`<b>${curFuse}</b>에는 ${need.join(" + ")} 기술이 융합되어 있어요.`+(opt.length?` (${opt.join(", ")}: 특수 재료를 쓰는 경우 포함)`:"")+(missed.length?`<br>빠진 분야: ${missed.join(", ")}`:"")+(extra.length?`<br>이 사례의 핵심이 아닌 분야: ${extra.join(", ")}`:""));
+});
+
+/* ===== L4 활동2: 아이디어 카드 ===== */
+const idSel=new Set(store.get("l4-fields",[]));
+FIELDS.forEach(f=>{const b=el("button",{class:"btn"+(idSel.has(f)?" sel":"")},f);b.addEventListener("click",()=>{idSel.has(f)?idSel.delete(f):idSel.add(f);b.classList.toggle("sel");store.set("l4-fields",[...idSel])});$("#idFields").append(b)});
+const SUS=[["환경","자원·에너지를 아끼거나 오염을 줄인다"],["환경","오래 쓰고 고치거나 재활용할 수 있다"],["사회","필요한 사람 누구나 안전하고 공정하게 쓸 수 있다"],["사회","개인정보·안전 문제를 고려했다"],["경제","만들고 유지하는 비용이 감당할 만하다"]];
+const susSaved=store.get("l4-sus",[]);
+SUS.forEach(([c,t],i)=>{const lab=el("label",{class:"chk"},`<input type="checkbox"><span><span class="chip">${c}</span> ${t}</span>`);const cb=$("input",lab);cb.checked=!!susSaved[i];cb.addEventListener("change",()=>{const s=store.get("l4-sus",[]);s[i]=cb.checked;store.set("l4-sus",s)});$("#idSus").append(lab)});
+$("#idMake").addEventListener("click",()=>{
+  const name=$("#idName").value.trim(), prob=$("#idProb").value.trim(), how=$("#idHow").value.trim();
+  const sus=$$("#idSus input").map((c,i)=>c.checked?SUS[i]:null).filter(Boolean);
+  const esc=s=>s.replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+  const tips=[]; if(!name||!prob||!how)tips.push("이름·문제·작동 방법을 모두 채워 보세요.");
+  if(idSel.size<2)tips.push("융합 기술이 되려면 기술 분야를 2개 이상 골라야 해요.");
+  const cats=new Set(sus.map(s=>s[0])); ["환경","사회","경제"].forEach(c=>{if(!cats.has(c))tips.push(`<b>${c}</b> 측면의 지속가능성도 생각해 보세요.`)});
+  $("#idOut").innerHTML=`<div class="idea-card"><span class="kicker">💡 지속가능한 융합 기술 아이디어</span><h3 style="margin-top:8px">${esc(name||"(이름 없음)")}</h3>
+   <p><b>해결할 문제</b> ${esc(prob||"-")}</p><p><b>융합 기술</b> ${[...idSel].map(f=>`<span class="chip">${f}</span>`).join("")||"-"}</p>
+   <p><b>작동 방법</b> ${esc(how||"-")}</p><p><b>지속가능성</b> ${sus.map(s=>`<span class="chip">${s[0]}</span>${s[1]}`).join(" · ")||"-"}</p>
+   <div class="fb show ${tips.length?"bad":"ok"}">${tips.length?"✏️ 더 발전시키기<br>"+tips.join("<br>"):"✅ 환경·사회·경제를 모두 고려한 멋진 아이디어예요! 친구들과 공유하고 서로 평가해 보세요."}</div></div>`;
+});
+
+/* ===== 근거 페이지 ===== */
+$("#evList").innerHTML=Object.entries(STD).map(([c,s])=>`<div class="card" style="margin-bottom:12px">
+  <div class="std" style="box-shadow:none;margin-top:0"><span class="code">${c}</span>${s.text}<span class="src">📎 ${SRC}</span></div>
+  <p><b>이 자료에서:</b> <a href="#${s.lesson}">${{l1:"1차시",l2:"2차시",l3:"3차시",l4:"4차시"}[s.lesson]} — ${s.title}</a></p>
+  <p class="note"><b>MCP 연결 학습 주제 ID</b> (core · 설계·문제 해결과 안전한 수행): <span class="mono">${s.topics.join(", ")}</span><br>
+  <b>MCP 평가 관점:</b> 학습자가 관련 개념·판단 근거·수행 과정을 자신의 말이나 결과물로 보여 주도록 과제·사례를 제시하고, 해결 과정과 근거를 설명·수행하게 한다.</p>
+  ${levelTable(c).replace('class="card table-wrap" style="margin-bottom:12px"','class="table-wrap"')}</div>`).join("");
+$("#allStd tbody").innerHTML=ALL4.map(([c,t])=>`<tr><td class="mono">${c}</td><td>${t}</td><td>${STD[c]?`<a href="#${STD[c].lesson}">✔ ${{l1:"1차시",l2:"2차시",l3:"3차시",l4:"4차시"}[STD[c].lesson]}</a>`:""}</td></tr>`).join("");
+
+route();
+</script>
+</body>
+</html>
